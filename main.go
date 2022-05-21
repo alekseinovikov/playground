@@ -1,15 +1,15 @@
 package main
 
 import (
-	"github.com/gofiber/fiber/v2"
+	"net/http"
+
+	"github.com/gin-gonic/gin"
 )
 
 func main() {
-	app := fiber.New()
-
-	app.Get("/", func(c *fiber.Ctx) error {
-		return c.SendString("Hello, world!")
+	r := gin.Default()
+	r.GET("/", func(c *gin.Context) {
+		c.String(http.StatusOK, "Hello, World")
 	})
-
-	app.Listen(":8080")
+	r.Run() // listen and serve on 0.0.0.0:8080
 }
